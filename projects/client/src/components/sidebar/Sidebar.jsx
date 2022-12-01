@@ -36,7 +36,7 @@ const Sidebar = () => {
       flexDir={"column"}
       justifyContent="space-between"
       backgroundColor={"blue.300"}
-      mt="-850px"
+      mt="-950px"
       ml={"-200px"}
     >
       <Flex p={"-3%"} flexDir="column" alignItems={"flex-start"} as="nav">
