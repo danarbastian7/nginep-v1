@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { Avatar, useToast } from "@chakra-ui/react"
 import Listing from "../../pages/listing/Listing"
+import ListingRow from "../room/ListingRow"
 import { axiosInstance } from "../../api"
 const Tenant = () => {
   const [tenant, setTenant] = useState([])
@@ -23,6 +24,18 @@ const Tenant = () => {
       console.log(error)
     }
   }
+  const renderTenant = () => {
+    return tenant.map((val) => {
+      return (
+        <ListingRow
+          id={val.id}
+          name={val.cities_name}
+
+          // image_url={val?.PropertyImages[0]?.image_url}
+        />
+      )
+    })
+  }
 
   useEffect(() => {
     fetchTenant()
@@ -30,7 +43,7 @@ const Tenant = () => {
 
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar /> */}
 
       <Listing />
     </>

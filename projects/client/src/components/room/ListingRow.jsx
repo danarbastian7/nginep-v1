@@ -21,32 +21,37 @@ import {
 import { TfiTrash } from "react-icons/tfi"
 import { Link } from "react-router-dom"
 
-const ListingRow = ({ name, image_url, id, properties }) => {
+const ListingRow = ({ name, image_url, id, properties, address, city }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [images, setImages] = useState([])
 
   const getImages = properties.map((val) => val.image_url)
-  console.log(getImages)
 
   return (
-    <Center py={3}>
+    <Center py={3} px={5}>
       <Link to={`/listing/details/${id}`}>
         <Stack
           borderRadius="lg"
-          w="355px"
-          height="100px"
+          w="340px"
+          height="150px"
           direction="row"
           bg={useColorModeValue("white", "gray.900")}
           boxShadow={"base"}
           padding={4}
+          position="static"
         >
-          <Flex flex={0.5} ml="10px">
+          <Flex flex={0.5} ml="-10px">
             {/* {properties.map((val) => (
               <Image src={val.image_url} h="100%" layout={"fill"} />
             ))} */}
 
-            <Image src={getImages[0]} h="100%" layout={"fill"} />
+            <Image
+              src={getImages[0]}
+              h="-moz-max-content"
+              width={"150px"}
+              layout={"fill"}
+            />
 
             {/* <Image
               ml={"50px"}
@@ -67,9 +72,19 @@ const ListingRow = ({ name, image_url, id, properties }) => {
               fontSize={"md"}
               fontFamily={"body"}
               fontWeight="bold"
-              pl="50px"
+              pl="10px"
             >
               {name || "name"}
+              <br />
+              {/* {images.map((val) => (
+                <Image src={val.picture_url} h="100%" layout={"fill"} />
+              ))} */}
+              {/* {city.map((val) => (
+                <Text>{val?.cities_name}</Text>
+              ))} */}
+              <Text fontSize={"x-small"} fontFamily={"mono"} fontWeight="light">
+                {city?.cities_name || "cities"}
+              </Text>
             </Text>
           </Stack>
         </Stack>

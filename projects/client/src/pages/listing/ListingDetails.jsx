@@ -34,6 +34,7 @@ const ListingDetails = () => {
   const [listing, setListing] = useState([])
   const [room, setRoom] = useState([])
   const [propertyPhoto, setPropertyPhoto] = useState([])
+  const [images, setImages] = useState([])
   const params = useParams()
 
   const fetchListingDetails = async () => {
@@ -42,30 +43,22 @@ const ListingDetails = () => {
 
       setListing(response.data.data)
       setPropertyPhoto(response.data.data)
+      setImages(response.data.data.PropertyImages)
       console.log(response)
     } catch (err) {
       console.log(err)
     }
   }
-  // console.log(propertyPhoto)
 
   const fetchRoom = async () => {
-    // try {
-    //   const response = await axiosInstance.get(`/room`)
-
-    //   setRoom(response.data.data[0].PropertyItems, "test3")
-    // } catch (err) {
-    //   console.log(err)
-    // }
     try {
       const response = await axiosInstance.get(`/room/${params.id}`)
 
-      setRoom(response.data.data.PropertyItems, "test3")
+      setRoom(response.data.data.PropertyItems)
     } catch (err) {
       console.log(err)
     }
   }
-  console.log(room)
 
   const renderRoomCard = () => {
     return room.map((val) => {
@@ -81,11 +74,11 @@ const ListingDetails = () => {
       )
     })
   }
+  console.log(listing)
+  console.log(images)
 
-  // var myArray = room.Images.map(function (images) {
-  //   return images[0]
-  // })
-  // console.log(myArray)
+  // const getImages = listing.map((val) => val.PropertyImages)
+  // console.log(getImages)
 
   const [index, setIndex] = useState(0)
 
@@ -127,7 +120,18 @@ const ListingDetails = () => {
       >
         <Slider {...settings}>
           {/* <Carousel> */}
-          {listing?.User?.Properties[0].PropertyImages?.map((val) => (
+          {/* {listing?.User?.Properties[0].PropertyImages?.map((val) => (
+            <Image
+              src={val.image_url}
+              rounded={"md"}
+              fit={"cover"}
+              align={"center"}
+              w={"100%"}
+              h={{ base: "350px", sm: "400px", lg: "500px" }}
+            />
+          ))} */}
+
+          {images?.map((val) => (
             <Image
               src={val.image_url}
               rounded={"md"}
@@ -137,6 +141,7 @@ const ListingDetails = () => {
               h={{ base: "350px", sm: "400px", lg: "500px" }}
             />
           ))}
+
           {/* </Carousel> */}
         </Slider>
 
@@ -163,7 +168,9 @@ const ListingDetails = () => {
               colorScheme="yellow"
               fontSize={"xl"}
             >
-              {listing?.User?.Properties[0].Category?.category_name}
+              {/* {listing?.User?.Properties[0].Category?.category_name} */}
+              {/* {getCategory} */}
+              {listing?.Category?.category_name}
             </Tag>
           </VStack>
 

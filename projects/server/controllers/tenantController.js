@@ -8,9 +8,14 @@ module.exports = {
       const findTenant = await User.findByPk(req.params.id, {
         include: {
           model: db.Properties,
-          include: {
-            model: db.PropertyImages,
-          },
+          include: [
+            { model: db.Categories },
+            { model: db.PropertyImages },
+            { model: db.Cities },
+          ],
+          // include: {
+          //   model: db.PropertyImages,
+          // },
         },
       })
       res.status(200).json({
