@@ -9,6 +9,7 @@ const authRoute = require("../routes/auth.route")
 const propertiesRoute = require("../routes/properties.route")
 const roomRoute = require("../routes/room.route")
 const tenantRoute = require("../routes/tenant.route")
+const citiesRoute = require("../routes/cities.route")
 const fs = require("fs")
 
 const PORT = process.env.PORT || 8000
@@ -44,7 +45,7 @@ app.use("/public", express.static("public"))
 app.use("/property", propertiesRoute)
 app.use("/room", roomRoute)
 app.use("/tenant", tenantRoute)
-
+app.use("/cities", citiesRoute)
 // const register = require("./routes/register")
 
 // app.use("/signup", register)

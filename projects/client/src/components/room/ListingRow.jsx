@@ -32,13 +32,13 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
     <Center py={3} px={5}>
       <Link to={`/listing/details/${id}`}>
         <Stack
-          borderRadius="lg"
+          borderRadius="2xl"
           w="340px"
           height="150px"
           direction="row"
-          bg={useColorModeValue("white", "gray.900")}
+          bg={useColorModeValue("whiteAlpha.800", "gray.500")}
           boxShadow={"base"}
-          padding={4}
+          padding={5}
           position="static"
         >
           <Flex flex={0.5} ml="-10px">
@@ -48,19 +48,11 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
 
             <Image
               src={getImages[0]}
+              borderRadius="2xl"
               h="-moz-max-content"
               width={"150px"}
               layout={"fill"}
             />
-
-            {/* <Image
-              ml={"50px"}
-              rounded={"md"}
-              src={
-                properties ||
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNK7-n-r_w_qCEIjsnu8VXMBamUkSmLUr9Eg&usqp=CAU"
-              }
-            /> */}
           </Flex>
           <Stack
             flex={1}
@@ -82,7 +74,7 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
               {/* {city.map((val) => (
                 <Text>{val?.cities_name}</Text>
               ))} */}
-              <Text fontSize={"x-small"} fontFamily={"mono"} fontWeight="light">
+              <Text fontSize={"small"} fontFamily={"mono"} fontWeight="light">
                 {city?.cities_name || "cities"}
               </Text>
             </Text>

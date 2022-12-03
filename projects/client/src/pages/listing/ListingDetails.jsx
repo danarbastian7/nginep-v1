@@ -160,7 +160,7 @@ const ListingDetails = () => {
               fontSize={"md"}
               fontWeight={"300"}
             >
-              {listing.address}
+              {listing.address}, {listing?.City?.cities_name}
             </Text>
             <Tag
               size={"md"}
@@ -184,36 +184,6 @@ const ListingDetails = () => {
             }
           >
             <Text fontSize={"md"}>{listing.description}</Text>
-
-            <Box>
-              <Text
-                fontSize={{ base: "16px", lg: "18px" }}
-                color={useColorModeValue("yellow.500", "yellow.300")}
-                fontWeight={"500"}
-                textTransform={"uppercase"}
-                mb={"4"}
-              >
-                Facilities
-              </Text>
-
-              <SimpleGrid columns={{ base: 3, md: 3 }} spacing={2}>
-                <List spacing={2}>
-                  <ListItem>Swimming Pool</ListItem>
-                  <ListItem>Billiard Table</ListItem>
-                  <ListItem>WiFi</ListItem>
-                </List>
-                <List spacing={2}>
-                  <ListItem>Jacuzzi</ListItem>
-                  <ListItem>Laundry</ListItem>
-                  <ListItem>Bathtub</ListItem>
-                </List>
-                <List spacing={2}>
-                  <ListItem>Restaurant</ListItem>
-                  <ListItem>Gym</ListItem>
-                  <ListItem>Parking Lot</ListItem>
-                </List>
-              </SimpleGrid>
-            </Box>
           </Stack>
         </Stack>
       </SimpleGrid>

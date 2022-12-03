@@ -28,8 +28,8 @@ import { BsThreeDotsVertical } from "react-icons/bs"
 import { axiosInstance } from "../../api"
 import { useParams } from "react-router-dom"
 import Slider from "react-slick"
-// import "slick-carousel/slick/slick.css"
-// import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 import { BiEditAlt } from "react-icons/bi"
 import { TfiTrash } from "react-icons/tfi"
 
@@ -161,7 +161,13 @@ const RoomCard = ({
             </Popover>
             <Slider {...settings}>
               {images.map((val) => (
-                <Image src={val.picture_url} h="100%" layout={"fill"} />
+                <Image
+                  src={val.picture_url}
+                  maxHeight="250px"
+                  borderRadius={"15px"}
+
+                  // layout={"fill"}
+                />
               ))}
             </Slider>
           </Box>
@@ -175,7 +181,10 @@ const RoomCard = ({
           </Heading>
           <HStack>
             <Text color={"green.500"} fontWeight={800} fontSize={"sm"}>
-              Jpy {price || "price"}
+              {new Intl.NumberFormat("ja-JP", {
+                style: "currency",
+                currency: "JPY",
+              }).format(price)}
             </Text>
             <Text color={"gray.500"} fontSize={"smaller"}>
               / room / night
