@@ -29,14 +29,14 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
   const getImages = properties.map((val) => val.image_url)
 
   return (
-    <Center py={3} px={5}>
+    <Center py={2} px={5} top="0" zIndex="0">
       <Link to={`/listing/details/${id}`}>
         <Stack
           borderRadius="2xl"
           w="340px"
           height="150px"
           direction="row"
-          bg={useColorModeValue("whiteAlpha.800", "gray.500")}
+          bg={useColorModeValue("gray.100", "black")}
           boxShadow={"base"}
           padding={5}
           position="static"
@@ -81,7 +81,7 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
           </Stack>
         </Stack>
       </Link>
-      <Box onClick={onOpen} position="relative" right={"30px"}>
+      <Box onClick={onOpen} position="relative" right={"30px"} bottom="50px">
         <TfiTrash />
       </Box>
 

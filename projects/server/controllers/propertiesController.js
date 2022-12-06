@@ -1,42 +1,43 @@
 const { Op } = require("sequelize")
 const db = require("../models")
-const Properties = db.Properties
-const Room = db.PropertyItems
+const Properties = db.Property
+const Room = db.PropertyItem
 const Cities = db.Cities
 
 module.exports = {
   getAllProperties: async (req, res) => {
     try {
       const {
-        _limit = 15,
+        _limit = 5,
         _page = 1,
         _sortBy = "id",
         _sortDir = "ASC",
       } = req.query
       const findAllProperties = await Properties.findAndCountAll({
         // where: {
-        //   name: {
-        //     [Op.like]: `%${req.query.name || ""}`,
+        //   cities_name: {
+        //     [Op.like]: `%${req.query.cities_name || ""}%`,
         //   },
         // },
         include: [
-          { model: db.User },
-          { model: db.Categories },
-          { model: db.PropertyImages },
           {
             model: db.Cities,
             where: {
               cities_name: {
-                [Op.like]: `%${req.query.cities_name || ""}`,
+                [Op.like]: `%${req.query.cities_name || ""}%`,
               },
             },
           },
+          { model: db.PropertyImage },
+          { model: db.User },
+          { model: db.Categories },
         ],
         limit: Number(_limit),
         offset: (_page - 1) * _limit,
         order: [[_sortBy, _sortDir]],
+        distinct: true,
       })
-      res.status(200).json({
+      return res.status(200).json({
         message: "Find all properties",
         data: findAllProperties.rows,
         dataCount: findAllProperties.count,
@@ -54,8 +55,9 @@ module.exports = {
         include: [
           { model: db.User },
           { model: db.Categories },
-          { model: db.PropertyImages },
+          { model: db.PropertyImage },
           { model: db.Cities },
+          { model: db.PropertyItem },
         ],
       })
 

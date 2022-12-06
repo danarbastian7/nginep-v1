@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       PropertyFacilities.belongsTo(models.Facilities)
-      PropertyFacilities.belongsTo(models.Properties)
+      PropertyFacilities.belongsTo(models.Property)
     }
   }
   PropertyFacilities.init(

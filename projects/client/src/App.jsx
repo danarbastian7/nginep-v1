@@ -27,6 +27,8 @@ import Analytics from "./components/Tenant/Analytics"
 import OrderList from "./components/Tenant/OrderList"
 import Listing from "./pages/listing/Listing"
 import ListingDetails from "./pages/listing/ListingDetails"
+import AddRoom from "./components/room/AddRoom"
+import AdliRoom from "./components/room/AdliRoom"
 
 import Property from "./components/Tenant/Property"
 // import Sidebar from "./components/sidebar/Sidebar"
@@ -110,6 +112,8 @@ function App() {
         <Route path="/notfound" element={<NotFoundPage />} />
 
         <Route path="/editprofile" element={<EditProfile />} />
+        <Route path="/inputroom" element={<AddRoom />} />
+        <Route path="/adliroom" element={<AdliRoom />} />
 
         {/* ========== Tenant Area =========== */}
         <Route

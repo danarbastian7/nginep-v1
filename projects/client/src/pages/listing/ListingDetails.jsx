@@ -103,7 +103,7 @@ const ListingDetails = () => {
   }, [])
 
   return (
-    <Container maxW={"7xl"} marginRight="200px" marginTop={"-600px"}>
+    <Container maxW={"7xl"} marginRight="200px" mt={"75px"}>
       <HStack p="3" pl="1" pr="1" justifyContent={"space-between"}>
         {/* <Link to="/listing"> */}
         <Link to={`/tenant/${authSelector.id}`}>
@@ -119,18 +119,6 @@ const ListingDetails = () => {
         pt={{ base: 18, md: 17 }}
       >
         <Slider {...settings}>
-          {/* <Carousel> */}
-          {/* {listing?.User?.Properties[0].PropertyImages?.map((val) => (
-            <Image
-              src={val.image_url}
-              rounded={"md"}
-              fit={"cover"}
-              align={"center"}
-              w={"100%"}
-              h={{ base: "350px", sm: "400px", lg: "500px" }}
-            />
-          ))} */}
-
           {images?.map((val) => (
             <Image
               src={val.image_url}
@@ -200,7 +188,9 @@ const ListingDetails = () => {
             Rooms
           </Text>
           <IconButton backgroundColor={"unset"} _hover={"unset"}>
-            <GrAdd size="25px" />
+            <Link to="/inputroom">
+              <GrAdd size="25px" />
+            </Link>
           </IconButton>
         </HStack>
 

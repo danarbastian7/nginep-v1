@@ -1,5 +1,5 @@
 const db = require("../models")
-const Properties = db.Properties
+const Properties = db.Property
 const User = db.User
 
 module.exports = {
@@ -7,14 +7,14 @@ module.exports = {
     try {
       const findTenant = await User.findByPk(req.params.id, {
         include: {
-          model: db.Properties,
+          model: db.Property,
           include: [
             { model: db.Categories },
-            { model: db.PropertyImages },
+            { model: db.PropertyImage },
             { model: db.Cities },
           ],
           // include: {
-          //   model: db.PropertyImages,
+          //   model: db.PropertyImage,
           // },
         },
       })

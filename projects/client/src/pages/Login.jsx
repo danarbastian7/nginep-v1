@@ -142,7 +142,7 @@ const Login = () => {
   }
 
   return (
-    <Box h="100vh" display={"flex"} alignItems="center" mt={"-600px"}>
+    <Box h="100vh" display={"flex"} alignItems="center">
       <Container>
         <Box p="8">
           <Text fontWeight="bold" fontSize="4xl" mb="8">

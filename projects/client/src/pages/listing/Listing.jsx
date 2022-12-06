@@ -55,9 +55,14 @@ const Listing = () => {
 
   return (
     <Center>
-      <Box mt={"-600px"} position={"fixed"}>
+      <Box marginTop={"100px"}>
         <Center>
-          <Text fontFamily={"sans-serif"} fontWeight="bold" fontSize={"2xl"}>
+          <Text
+            fontFamily={"sans-serif"}
+            fontWeight="bold"
+            fontSize={"2xl"}
+            position="absolute"
+          >
             Your List of Properties
           </Text>
         </Center>
