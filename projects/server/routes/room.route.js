@@ -13,5 +13,6 @@ router.post(
   }).array("picture_url", 6),
   roomController.createRoom
 )
+router.delete("/delete/:id", roomController.deleteRoom)
 
 module.exports = router

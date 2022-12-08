@@ -22,6 +22,7 @@ module.exports = {
       //     //   },
       //     // ],
       //   },
+
       const findRoomById = await Properties.findByPk(req.params.id, {
         include: {
           model: db.PropertyItem,
@@ -43,8 +44,11 @@ module.exports = {
   },
   createRoom: async (req, res) => {
     try {
-      // const foundPropertyById = await db.Property.findByPk(id)
-
+      // const foundPropertyById = await db.Property.findByPk(req.params.id)
+      // console.log(foundPropertyById)
+      // const foundPropertyById = await db.Property.findByPk(req.body.PropertyId)
+      // console.log(foundPropertyById)
+      // console.log(req.body.PropertyId)
       // if (!foundPropertyById) {
       //   throw new Error("Property id not found")
       // }
@@ -53,8 +57,9 @@ module.exports = {
         description: req.body.description,
         capacity: req.body.capacity,
         price: req.body.price,
-        // PropertyId: foundPropertyById.id,
-        PropertyId: "1",
+        // PropertyId: foundPropertyById,
+        PropertyId: req.body.PropertyId,
+        // PropertyId: "1",
       })
 
       //================================Post Image
@@ -95,6 +100,23 @@ module.exports = {
       return res.status(201).json({
         message: "Post new room",
         data: foundRoomById,
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
+  deleteRoom: async (req, res) => {
+    try {
+      await Room.destroy({
+        where: {
+          id: req.params.id,
+        },
+      })
+      return res.status(200).json({
+        message: "property deleted",
       })
     } catch (err) {
       console.log(err)

@@ -23,6 +23,12 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+  VStack,
 } from "@chakra-ui/react"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { axiosInstance } from "../../api"
@@ -40,10 +46,12 @@ const RoomCard = ({
   description,
   images,
   picture_url,
+  onDelete,
 }) => {
   const params = useParams()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef = React.useRef()
 
   //pindah ke ListingDetails
   const [roomPhoto, setRoomPhoto] = useState([])
@@ -63,6 +71,10 @@ const RoomCard = ({
   // }, [])
   //============================
 
+  const confirmDeleteBtnHandler = () => {
+    onClose()
+    onDelete()
+  }
   const settings = {
     dots: true,
     lazyLoad: true,
@@ -97,11 +109,9 @@ const RoomCard = ({
             <Popover>
               <PopoverTrigger>
                 <IconButton
-                  //   position={"sticky"}
-                  right="-250"
-                  top="-2"
                   background={"blue.500"}
                   _hover="none"
+                  width={"30px"}
                 >
                   <BsThreeDotsVertical color="white" size={"20px"} />
                 </IconButton>
@@ -113,7 +123,7 @@ const RoomCard = ({
               >
                 <PopoverArrow />
                 <PopoverBody>
-                  <Stack>
+                  <VStack>
                     <Button
                       w="194px"
                       variant="ghost"
@@ -133,10 +143,51 @@ const RoomCard = ({
                       colorScheme="red"
                       fontSize="sm"
                       onClick={onOpen}
+                      position="relative"
                     >
                       Delete
                     </Button>
-                    <Modal isOpen={isOpen} onClose={onClose}>
+
+                    <AlertDialog
+                      isCentered
+                      isOpen={isOpen}
+                      leastDestructiveRef={cancelRef}
+                      onClose={onClose}
+                    >
+                      <AlertDialogOverlay
+                        backgroundColor={"white"}
+                        boxSize="-webkit-max-content"
+                        justifyItems={"center"}
+                        alignSelf="center"
+                        borderRadius={"10px"}
+                        isCentered
+                      >
+                        <AlertDialogHeader fontSize={"md"} fontWeight="bold">
+                          Delete Room
+                        </AlertDialogHeader>
+                        <AlertDialogBody>
+                          Are you sure to delete this room ?
+                        </AlertDialogBody>
+                        <AlertDialogFooter>
+                          <Button
+                            ref={cancelRef}
+                            onClick={onClose}
+                            colorScheme="gray"
+                            color={"black"}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            colorScheme={"red"}
+                            onClick={confirmDeleteBtnHandler}
+                          >
+                            Delete
+                          </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogOverlay>
+                    </AlertDialog>
+
+                    {/* <Modal isOpen={isOpen} onClose={onClose}>
                       <ModalOverlay />
                       <ModalContent w="350px">
                         <ModalHeader>Delete Room</ModalHeader>
@@ -146,7 +197,11 @@ const RoomCard = ({
                         </ModalBody>
 
                         <ModalFooter>
-                          <Button variant={"solid"} mr={3}>
+                          <Button
+                            variant={"solid"}
+                            mr={3}
+                            onClick={confirmDeleteBtnHandler}
+                          >
                             Delete
                           </Button>
                           <Button variant="ghost" onClick={onClose}>
@@ -154,15 +209,16 @@ const RoomCard = ({
                           </Button>
                         </ModalFooter>
                       </ModalContent>
-                    </Modal>
-                  </Stack>
+                    </Modal> */}
+                  </VStack>
                 </PopoverBody>
               </PopoverContent>
             </Popover>
             <Slider {...settings}>
               {images.map((val) => (
                 <Image
-                  src={val.picture_url}
+                  // src={val.picture_url}
+                  src={`http://localhost:8000/public/${val.picture_url}`}
                   maxHeight="250px"
                   borderRadius={"15px"}
 

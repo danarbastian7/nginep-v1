@@ -16,6 +16,9 @@ import {
   HStack,
   Tag,
   IconButton,
+  Toast,
+  useDisclosure,
+  useToast,
 } from "@chakra-ui/react"
 import React, { useEffect, useState } from "react"
 import { axiosInstance } from "../../api"
@@ -36,6 +39,7 @@ const ListingDetails = () => {
   const [propertyPhoto, setPropertyPhoto] = useState([])
   const [images, setImages] = useState([])
   const params = useParams()
+  const toast = useToast()
 
   const fetchListingDetails = async () => {
     try {
@@ -55,10 +59,26 @@ const ListingDetails = () => {
       const response = await axiosInstance.get(`/room/${params.id}`)
 
       setRoom(response.data.data.PropertyItems)
+      console.log(response, "coba")
     } catch (err) {
       console.log(err)
     }
   }
+  //===============================DELETE ROOM
+  const deleteRoom = async (id) => {
+    try {
+      await axiosInstance.delete(`/room/delete/${id}`)
+
+      window.location.reload(false)
+      toast({ title: "Post deleted", status: "success" })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  // onDelete={() => deleteRoom(val.id)}
+  // const [images, setImages] = useState([])
+
+  // const getImages = properties.map((val) => val.image_url)
 
   const renderRoomCard = () => {
     return room.map((val) => {
@@ -70,12 +90,14 @@ const ListingDetails = () => {
           price={val.price}
           description={val.description}
           images={val.Images}
+          onDelete={() => deleteRoom(val.id)}
         />
       )
     })
   }
-  console.log(listing)
-  console.log(images)
+  // console.log(listing)
+  // console.log(images)
+  console.log(room)
 
   // const getImages = listing.map((val) => val.PropertyImages)
   // console.log(getImages)
@@ -122,6 +144,7 @@ const ListingDetails = () => {
           {images?.map((val) => (
             <Image
               src={val.image_url}
+              // src={`http://localhost:8000/public/${val.image_url}`}
               rounded={"md"}
               fit={"cover"}
               align={"center"}
@@ -188,7 +211,8 @@ const ListingDetails = () => {
             Rooms
           </Text>
           <IconButton backgroundColor={"unset"} _hover={"unset"}>
-            <Link to="/inputroom">
+            {/* {`/tenant/${authSelector.id}`} */}
+            <Link to={`/inputroom?id=${listing.id}`}>
               <GrAdd size="25px" />
             </Link>
           </IconButton>

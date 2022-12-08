@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Property.belongsTo(models.Cities)
       Property.belongsTo(models.Categories)
-      Property.hasMany(models.PropertyItem)
+      Property.hasMany(models.PropertyItem, { onDelete: "CASCADE" })
       Property.hasMany(models.PropertyFacilities)
       Property.hasMany(models.PropertyImage, { onDelete: "CASCADE" })
       Property.belongsTo(models.User)
