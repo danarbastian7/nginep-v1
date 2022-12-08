@@ -31,6 +31,9 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { useSelector } from "react-redux"
+import { useFormik } from "formik"
+import { async } from "@firebase/util"
+import axios from "axios"
 
 const ListingDetails = () => {
   const authSelector = useSelector((state) => state.auth)
@@ -75,10 +78,6 @@ const ListingDetails = () => {
       console.log(err)
     }
   }
-  // onDelete={() => deleteRoom(val.id)}
-  // const [images, setImages] = useState([])
-
-  // const getImages = properties.map((val) => val.image_url)
 
   const renderRoomCard = () => {
     return room.map((val) => {
@@ -98,9 +97,6 @@ const ListingDetails = () => {
   // console.log(listing)
   // console.log(images)
   console.log(room)
-
-  // const getImages = listing.map((val) => val.PropertyImages)
-  // console.log(getImages)
 
   const [index, setIndex] = useState(0)
 

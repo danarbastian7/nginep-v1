@@ -28,9 +28,9 @@ import OrderList from "./components/Tenant/OrderList"
 import Listing from "./pages/listing/Listing"
 import ListingDetails from "./pages/listing/ListingDetails"
 import AddRoom from "./components/room/AddRoom"
-import AdliRoom from "./components/room/AdliRoom"
 
 import Property from "./components/Tenant/Property"
+import Loader from "./components/loader/Loader"
 // import Sidebar from "./components/sidebar/Sidebar"
 // import { useDispatch } from "react-redux"
 // import {
@@ -39,6 +39,8 @@ import Property from "./components/Tenant/Property"
 // } from "./utils/firebase/firebase.utils"
 
 function App() {
+  // const [loaded, setLoaded] = useState(false)
+
   const authSelector = useSelector((state) => state.auth)
   console.log(authSelector, "test")
   const [message, setMessage] = useState("")
@@ -94,6 +96,12 @@ function App() {
       setMessage(data?.message || "")
     })()
   }, [])
+  // useEffect(() => {
+  //   let timer = setTimeout(() => setLoaded(true), 2000)
+  //   return () => {
+  //     clearTimeout(timer)
+  //   }
+  // }, [])
 
   return (
     <main>
@@ -101,6 +109,7 @@ function App() {
         location.pathname.match("tenant") ? : 
         <Navbar />} */}
       <Navbar />
+      {/* {!loaded ? <Loader /> : <ListingDetails />} */}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -113,7 +122,6 @@ function App() {
 
         <Route path="/editprofile" element={<EditProfile />} />
         <Route path="/inputroom" element={<AddRoom />} />
-        <Route path="/adliroom" element={<AdliRoom />} />
 
         {/* ========== Tenant Area =========== */}
         <Route
@@ -131,6 +139,7 @@ function App() {
         <Route path="/orderlist" element={<OrderList />} />
         {/* <Route path="/sidebar" element={<Sidebar />} /> */}
         <Route path="/listing" element={<Listing />} />
+
         <Route path="/listing/details/:id" element={<ListingDetails />} />
       </Routes>
       {/* <Footer /> */}

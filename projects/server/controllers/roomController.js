@@ -125,4 +125,29 @@ module.exports = {
       })
     }
   },
+  editRoomInfo: async (req, res) => {
+    try {
+      await Room.findOne({
+        where: {
+          id: req.params.id,
+        },
+      })
+      await Room.update(
+        { ...req.body },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      )
+      return res.status(200).json({
+        message: "Room updated",
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
 }

@@ -14,5 +14,6 @@ router.post(
   roomController.createRoom
 )
 router.delete("/delete/:id", roomController.deleteRoom)
+router.patch("/editroom/:id", roomController.editRoomInfo)
 
 module.exports = router

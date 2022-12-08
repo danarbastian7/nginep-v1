@@ -29,6 +29,10 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
   VStack,
+  FormControl,
+  FormLabel,
+  Input,
+  useToast,
 } from "@chakra-ui/react"
 import { BsThreeDotsVertical } from "react-icons/bs"
 import { axiosInstance } from "../../api"
@@ -38,6 +42,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { BiEditAlt } from "react-icons/bi"
 import { TfiTrash } from "react-icons/tfi"
+import { useFormik } from "formik"
 
 const RoomCard = ({
   item_name,
@@ -47,34 +52,65 @@ const RoomCard = ({
   images,
   picture_url,
   onDelete,
+  id,
 }) => {
   const params = useParams()
+  const toast = useToast()
+  const roomId = id
+  console.log(roomId)
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  // const { isOpen, onOpen, onClose } = useDisclosure()
+  const modalDelete = useDisclosure()
+  const modalEditInfo = useDisclosure()
+  const [openModalEdit, setOpenModalEdit] = useState(false)
+  const [closeModalEdit, setCloseModalEdit] = useState(false)
+
   const cancelRef = React.useRef()
-
-  //pindah ke ListingDetails
-  const [roomPhoto, setRoomPhoto] = useState([])
-
-  // const fetchRoomPhoto = async () => {
-  //   try {
-  //     const response = await axiosInstance.get(`/property/room`)
-
-  //     setRoomPhoto(response.data.data.Images)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchRoomPhoto()
-  // }, [])
-  //============================
+  const initialRef = React.useRef()
+  const finalRef = React.useRef()
 
   const confirmDeleteBtnHandler = () => {
-    onClose()
+    // onClose()
+    modalDelete.onClose()
     onDelete()
   }
+  //=======================UPDATE ROOM INFO
+  const formik = useFormik({
+    initialValues: {
+      item_name: item_name,
+      description: description,
+      capacity: capacity,
+      price: price,
+    },
+    onSubmit: async ({ item_name, description, capacity, price }) => {
+      try {
+        const response = await axiosInstance.patch(`/room/editroom/${roomId}`, {
+          item_name,
+          description,
+          capacity,
+          price,
+        })
+
+        toast({
+          title: "Success to edit room info",
+          status: "success",
+        })
+        window.location.reload(false)
+      } catch (err) {
+        console.log(err)
+        toast({
+          title: "Failed to edit room info",
+          status: "error",
+        })
+      }
+    },
+  })
+  const formChangeHandler = ({ target }) => {
+    const { name, value } = target
+    formik.setFieldValue(name, value)
+  }
+
+  console.log(formik)
   const settings = {
     dots: true,
     lazyLoad: true,
@@ -131,8 +167,94 @@ const RoomCard = ({
                       justifyContent="space-between"
                       fontWeight="normal"
                       fontSize="sm"
+                      // onClick={() => setOpenModalEdit(true)}
+                      onClick={modalEditInfo.onOpen}
                     >
-                      Edit
+                      Edit Room Info
+                    </Button>
+
+                    <Modal
+                      isOpen={modalEditInfo.isOpen}
+                      onClose={modalEditInfo.onClose}
+                    >
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader>Edit your room information</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          <FormControl isRequired>
+                            <FormLabel>Room type</FormLabel>
+                            <Input
+                              placeholder="type here"
+                              type="text"
+                              name="item_name"
+                              defaultValue={item_name}
+                              onChange={formChangeHandler}
+                            />
+                          </FormControl>
+                          <FormControl isRequired>
+                            <FormLabel>Description</FormLabel>
+                            <Input
+                              placeholder="type here"
+                              type="text"
+                              h={"200px"}
+                              textTransform="full-size-kana"
+                              name="description"
+                              defaultValue={description}
+                              onChange={formChangeHandler}
+                            />
+                          </FormControl>
+                          <FormControl isRequired>
+                            <FormLabel>Capacity</FormLabel>
+                            <Input
+                              placeholder="type here"
+                              type="number"
+                              name="capacity"
+                              defaultValue={capacity}
+                              onChange={formChangeHandler}
+                            />
+                          </FormControl>
+                          <FormControl isRequired>
+                            <FormLabel>Price</FormLabel>
+                            <Input
+                              placeholder="type here"
+                              type="number"
+                              name="price"
+                              defaultValue={price}
+                              onChange={formChangeHandler}
+                            />
+                          </FormControl>
+                        </ModalBody>
+                        <ModalFooter>
+                          <Button
+                            colorScheme={"red"}
+                            onClick={modalEditInfo.onClose}
+                            // onClose={closeModalEdit}
+                            // isOpen={() => setCloseModalEdit(false)}
+                          >
+                            Close
+                          </Button>
+                          <Button
+                            colorScheme={"blue"}
+                            type="submit"
+                            onClick={formik.handleSubmit}
+                          >
+                            Save
+                          </Button>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
+                    {/* </form> */}
+
+                    <Button
+                      w="194px"
+                      variant="ghost"
+                      rightIcon={<BiEditAlt />}
+                      justifyContent="space-between"
+                      fontWeight="normal"
+                      fontSize="sm"
+                    >
+                      Edit Room Images
                     </Button>
                     <Button
                       w="194px"
@@ -142,7 +264,8 @@ const RoomCard = ({
                       fontWeight="normal"
                       colorScheme="red"
                       fontSize="sm"
-                      onClick={onOpen}
+                      // onClick={onOpen}
+                      onClick={modalDelete.onOpen}
                       position="relative"
                     >
                       Delete
@@ -150,9 +273,11 @@ const RoomCard = ({
 
                     <AlertDialog
                       isCentered
-                      isOpen={isOpen}
+                      // isOpen={isOpen}
+                      isOpen={modalDelete.isOpen}
                       leastDestructiveRef={cancelRef}
-                      onClose={onClose}
+                      // onClose={onClose}
+                      onClose={modalDelete.onClose}
                     >
                       <AlertDialogOverlay
                         backgroundColor={"white"}
@@ -171,7 +296,8 @@ const RoomCard = ({
                         <AlertDialogFooter>
                           <Button
                             ref={cancelRef}
-                            onClick={onClose}
+                            // onClick={onClose}
+                            onClick={modalDelete.onClose}
                             colorScheme="gray"
                             color={"black"}
                           >
@@ -186,30 +312,6 @@ const RoomCard = ({
                         </AlertDialogFooter>
                       </AlertDialogOverlay>
                     </AlertDialog>
-
-                    {/* <Modal isOpen={isOpen} onClose={onClose}>
-                      <ModalOverlay />
-                      <ModalContent w="350px">
-                        <ModalHeader>Delete Room</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                          Are you sure want to delete this Room?
-                        </ModalBody>
-
-                        <ModalFooter>
-                          <Button
-                            variant={"solid"}
-                            mr={3}
-                            onClick={confirmDeleteBtnHandler}
-                          >
-                            Delete
-                          </Button>
-                          <Button variant="ghost" onClick={onClose}>
-                            Cancel
-                          </Button>
-                        </ModalFooter>
-                      </ModalContent>
-                    </Modal> */}
                   </VStack>
                 </PopoverBody>
               </PopoverContent>
