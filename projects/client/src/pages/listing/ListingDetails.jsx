@@ -56,6 +56,7 @@ const ListingDetails = () => {
       console.log(err)
     }
   }
+  console.log(images)
 
   const fetchRoom = async () => {
     try {

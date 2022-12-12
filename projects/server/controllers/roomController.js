@@ -6,6 +6,21 @@ const Room = db.PropertyItem
 const Images = db.Images
 
 module.exports = {
+  getAllRoom: async (req, res) => {
+    try {
+      const findAllRoom = await db.Images.findAll()
+
+      return res.status(200).json({
+        message: "Get all user",
+        data: findAllRoom,
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
   getRoom: async (req, res) => {
     try {
       // const findRoomById = await Properties.findAll({
@@ -142,6 +157,54 @@ module.exports = {
       )
       return res.status(200).json({
         message: "Room updated",
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
+  deleteImageRoom: async (req, res) => {
+    const path = "public"
+    const fileName = await db.Images.findOne({
+      where: {
+        id: req.params.id,
+      },
+    })
+
+    try {
+      await db.Images.destroy({
+        where: {
+          id: req.params.id,
+        },
+      })
+      fs.unlinkSync(path + fileName.picture_url)
+      return res.status(200).json({
+        message: "Image deleted",
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
+  postImageRoom: async (req, res) => {
+    try {
+      await Room.findOne({
+        where: {
+          id: req.params.id,
+        },
+      })
+      const newImgRoom = await db.Images.create({
+        picture_url: req.file.filename,
+        PropertyItemId: req.params.id,
+      })
+      console.log(req.file.filename)
+      return res.status(200).json({
+        message: "Room images has been added",
+        data: newImgRoom,
       })
     } catch (err) {
       console.log(err)

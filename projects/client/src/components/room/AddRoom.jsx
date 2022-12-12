@@ -223,15 +223,9 @@ const AddRoom = () => {
                     </Flex>
                   </label>
                 </Box>
-                {/* <Image
-                  boxSize="150px"
-                  objectFit="cover"
-                  src="https://bit.ly/dan-abramov"
-                  alt="Dan Abramov"
-                /> */}
               </Box>
             </Stack>
-            {/* </form> */}
+
             <Box
               position={"relative"}
               display="grid"
