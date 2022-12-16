@@ -1,6 +1,5 @@
 import axios from "axios"
 import logo from "./logo.svg"
-import "./App.css"
 import { useEffect, useState } from "react"
 import Home from "./components/home/Home"
 
@@ -9,12 +8,10 @@ import Login from "./pages/Login"
 import { Link } from "react-router-dom"
 import Navbar from "./components/navbar/Navbar"
 import SignUpForm from "./components/sign-up-form/sign-up-form.components"
-import SignInForm from "./components/sign-in-form/sign-in-form.components"
 import MyProfile from "./components/my-profile/MyProfile"
 import EditProfile from "./components/edit-profile/EditProfile"
 import Tenant from "./components/Tenant/Tenant"
 import NotFoundPage from "./components/404"
-import Footer from "./components/Footer/Footer"
 
 import { useDispatch, useSelector } from "react-redux"
 import { axiosInstance } from "./api/index"
@@ -31,16 +28,8 @@ import AddRoom from "./components/room/AddRoom"
 
 import Property from "./components/Tenant/Property"
 import Loader from "./components/loader/Loader"
-// import Sidebar from "./components/sidebar/Sidebar"
-// import { useDispatch } from "react-redux"
-// import {
-//   onAuthStateChangedListener,
-//   createUserDocumentFromAuth,
-// } from "./utils/firebase/firebase.utils"
 
 function App() {
-  // const [loaded, setLoaded] = useState(false)
-
   const authSelector = useSelector((state) => state.auth)
   console.log(authSelector, "test")
   const [message, setMessage] = useState("")
@@ -96,12 +85,6 @@ function App() {
       setMessage(data?.message || "")
     })()
   }, [])
-  // useEffect(() => {
-  //   let timer = setTimeout(() => setLoaded(true), 2000)
-  //   return () => {
-  //     clearTimeout(timer)
-  //   }
-  // }, [])
 
   return (
     <main>
@@ -137,7 +120,7 @@ function App() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/property" element={<Property />} />
         <Route path="/orderlist" element={<OrderList />} />
-        {/* <Route path="/sidebar" element={<Sidebar />} /> */}
+
         <Route path="/listing" element={<Listing />} />
 
         <Route path="/listing/details/:id" element={<ListingDetails />} />

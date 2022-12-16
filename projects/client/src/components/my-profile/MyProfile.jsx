@@ -5,7 +5,7 @@ import image from "../../assets/Foto_Danar_Sadan_Bastian_4x6-removebg-preview.jp
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { Avatar, useToast } from "@chakra-ui/react"
+import { Avatar, Button, useToast } from "@chakra-ui/react"
 import { axiosInstance } from "../../api/index"
 import { useEffect } from "react"
 import { useFormik } from "formik"
@@ -53,7 +53,9 @@ const MyProfile = () => {
 
             <h4>{authSelector.birthdate}</h4>
             <Link to={"/editprofile"}>
-              <button type="submit">Edit Profile</button>
+              <Button colorScheme={"blue"} type="submit">
+                Edit Profile
+              </Button>
             </Link>
           </div>
         </div>

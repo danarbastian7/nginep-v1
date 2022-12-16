@@ -1,19 +1,4 @@
-:root {
-  --PrimaryColor: hsl(220, 92%, 53%);
-  --HoverColor: hsl(239, 92%, 53%);
-  --WhiteColor: hsl(0, 0%, 100%);
-  --BlackColor: hsl(0, 0%, 5%);
-  //   --TextColor: hsl(273, 100%, 65%);
-  --TextColor: hsl(273, 100%, 0%);
-  --WhiteColorDeam: hsl(0, 0%, 90%);
-  --GreyBg: hsl(0, 0%, 95%);
-  --GreyText: rgb(190, 190, 190);
-  --InputColor: hsl(330, 12%, 97%);
-}
-
 .profile-container {
-  width: 300px;
-  height: 550px;
   background: white;
   border-radius: 10px;
   border-style: 1px solid;
@@ -21,23 +6,21 @@
   justify-content: center;
   align-items: center;
   width: 300px;
-  height: 81vh;
+  height: max-content;
   background: white;
   border-radius: 10px;
   box-shadow: 0px 1px 10px 1px grey;
   justify-content: center;
+
   align-items: center;
   position: relative;
   box-sizing: border-box;
-  margin: auto;
 
-  margin-top: 50px;
-
-  position: sticky;
+  margin-top: 75px;
 
   position: sticky;
+
   .row {
-    align-items: center;
     align-items: center;
   }
 }
@@ -45,12 +28,12 @@
 form {
   justify-content: center;
   align-items: center;
-  margin-left: 50px;
+  margin-left: 25px;
 }
 
 input {
   border-radius: 5px;
-  line-height: 0.5px;
+  // line-height: 0.5px;
   border-color: hsl(220, 92%, 53%);
   font-style: italic;
   font-weight: lighter;

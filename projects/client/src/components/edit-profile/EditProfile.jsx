@@ -3,6 +3,10 @@ import styled from "styled-components"
 import "./EditProfile.scss"
 import { useDispatch, useSelector } from "react-redux"
 import {
+  Button,
+  Center,
+  Flex,
+  Input,
   Menu,
   MenuButton,
   MenuDivider,
@@ -19,6 +23,7 @@ import { useParams, Link, Navigate, useNavigate } from "react-router-dom"
 import { axiosInstance } from "../../api/index"
 import { login } from "../../redux/features/authSlice"
 import { useEffect, useState } from "react"
+import { DatePicker } from "antd"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
 
@@ -145,40 +150,27 @@ const EditProfile = () => {
                 <label for="birthdate">Birthdate</label>
                 <br />
                 <input
-                  type={"date"}
+                  type="date"
                   id="birthdate"
-                  className="form-control"
                   name="birthdate"
                   onChange={formChangeHandler}
+                  defaultValue={authSelector.birthdate}
                   style={{
                     height: "30px",
                     fontSizeAdjust: "initial",
                   }}
-
-                  // style={{
-                  //   height: "40px",
-                  //   fontStyle: "normal",
-                  // }}
                 />
+                {/* <DatePicker
+                  onChange={formChangeHandler}
+                  name="birthdate"
+                  id="birthdate"
+                  // className="form-control"
+                /> */}
               </div>
               <div className="form-group">
                 <label for="gender">Gender</label>
                 <br />
                 <div>
-                  {/* <select
-                    name="gender"
-                    required
-                    onChange={formChangeHandler}
-                    defaultValue={authSelector.gender}
-                    style={{
-                      fontSize: "15px",
-                      borderRadius: "10px",
-                    }}
-                    class="dropdown"
-                  >
-                    <option value={"female"}>Female</option>
-                    <option value={"male"}>Male</option>
-                  </select> */}
                   <Select
                     size={"sm"}
                     borderRadius="5px"
@@ -200,15 +192,11 @@ const EditProfile = () => {
                 <div className="d-flex align-items-center">
                   <div className="avatar">
                     <div className="custom-file">
-                      <input
-                        style={{
-                          fontSize: "12px",
-                          color: "red",
-                          marginLeft: "50px",
-                          marginTop: "20px",
-                        }}
+                      <Input
+                        width={"15rem"}
+                        border="none"
+                        mt={"20px"}
                         type="file"
-                        className="custom-file-input"
                         name="profile_picture"
                         id="customFile"
                         accept="image/*"
@@ -219,9 +207,6 @@ const EditProfile = () => {
                           )
                         }
                       />
-                      {/* <label className="custom-file-label" for="customFile">
-                        Image Url
-                      </label> */}
                     </div>
                     <img
                       className="rounded-circle"
@@ -242,17 +227,14 @@ const EditProfile = () => {
               </div>
               {/* <Link to={"/myprofile"}> */}
               {/* {formik.handleSubmit ? ( */}
-              <button
-                className="btn update-btn btn-block mt-4 mb-3"
+              <Button
+                colorScheme={"green"}
                 type="button"
                 onClick={formik.handleSubmit}
-                style={{
-                  marginLeft: "50px",
-                  marginTop: "20px",
-                }}
+                ml="50px"
               >
                 Update
-              </button>
+              </Button>
               {/* // ) : null} */}
             </form>
           </div>

@@ -29,19 +29,6 @@ const Popular = ({ id, name, city, properties_image }) => {
     <div className="popularMain">
       <section className="popular section container" id="popular">
         <div className="secContainer">
-          {/* <div className="secheader flex">
-            <div className="textDiv">
-              <h2 className="secTitle">Popular Place to Stay</h2>
-              <p>
-                Don't worry about your place to stay for an incredible holiday.
-              </p>
-            </div>
-            <div className="iconsDiv flex">
-              <HiArrowNarrowLeft className="icon leftIcon" />
-              <HiArrowNarrowRight className="icon rightIcon" />
-            </div>
-          </div> */}
-          {/* <Link to={`/listing/details/${id}`}> */}
           <div
             style={{
               marginTop: "5rem",
@@ -50,11 +37,6 @@ const Popular = ({ id, name, city, properties_image }) => {
             <div className="mainContent">
               <div className="singleDestination">
                 <div className="destImage">
-                  {/* <Slider {...settings}>
-                    <img src={getImages?.image_url} alt="" />
-                  </Slider> */}
-                  {/* <Slider {...settings}> */}
-
                   {properties_image.map((val) => (
                     <img src={val.image_url} />
                   ))}

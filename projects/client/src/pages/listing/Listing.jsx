@@ -54,8 +54,8 @@ const Listing = () => {
   }, [])
 
   return (
-    <Center>
-      <Box marginTop={"100px"}>
+    <Center marginTop={"100px"}>
+      <Box>
         <Center>
           <Text
             fontFamily={"sans-serif"}

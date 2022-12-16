@@ -53,16 +53,6 @@ const Navbar = () => {
                 Home
               </a>
             </li>
-            {/* <li className="navItem">
-              <a href="#popular" className="navLink">
-                Popular
-              </a>
-            </li> */}
-            <li className="navItem">
-              <a href="#" className="navLink">
-                Resources
-              </a>
-            </li>
             <li className="navItem">
               <a href={`/tenant/${authSelector.id}`} className="navLink">
                 Tenant Page
@@ -74,9 +64,6 @@ const Navbar = () => {
               </a>
             </li>
             <div className="headerBtns flex">
-              {/* <Link className="btn loginBtn" to="/login">
-                Login/Signup
-              </Link> */}
               <button className="btn loginBtn">
                 <Link to="/login">
                   <a href="/login">Login/Logout</a>
