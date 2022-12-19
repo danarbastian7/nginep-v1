@@ -111,12 +111,6 @@ const Home = () => {
                 </button>
               </div>
               <div className="homeCard grid">
-                {/* <div className="locationDiv">
-                <label htmlFor="location">Name</label>
-                <br />
-                <input type={"text"} placeholder="Let's stay with us" />
-              </div> */}
-
                 <div className="distDiv">
                   <label htmlFor="distance">Location</label>
                   <br />
@@ -175,10 +169,6 @@ const Home = () => {
             >
               <AlertIcon boxSize="40px" mr="0" />
               <AlertTitle>No Property on your location filter!</AlertTitle>
-              {/* <AlertDescription>
-                Coba kata kunci lain atau cek produk rekomendasi kami.
-                Terimakasih{" "}
-              </AlertDescription> */}
               <Button boxSize={"-webkit-max-content"}>
                 <a href="#search">Change keyword</a>
               </Button>
@@ -190,32 +180,6 @@ const Home = () => {
           </Text>
           {page >= maxPage ? null : <FaArrowRight onClick={nextPage} />}
         </HStack>
-
-        <div>
-          {/* {property.length >= maxPage ? null : (
-            <button
-              onClick={setMoreBtnHandler}
-              style={{
-                marginTop: "320px",
-                marginLeft: "130px",
-              }}
-            >
-              See More
-            </button>
-          )} */}
-        </div>
-        <div>
-          {/* {!property.length ? (
-          <Alert
-            status="warning"
-            marginTop={"200px"}
-            backgroundColor="red.500"
-            color={"white"}
-          >
-            <AlertTitle>No Property on your location filter</AlertTitle>
-          </Alert>
-        ) : null} */}
-        </div>
       </div>
     </>
   )
