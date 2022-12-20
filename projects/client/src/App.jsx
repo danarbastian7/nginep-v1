@@ -10,43 +10,25 @@ import Navbar from "./components/navbar/Navbar"
 import SignUpForm from "./components/sign-up-form/sign-up-form.components"
 import MyProfile from "./components/my-profile/MyProfile"
 import EditProfile from "./components/edit-profile/EditProfile"
-import Tenant from "./components/Tenant/Tenant"
+
 import NotFoundPage from "./components/404"
 
 import { useDispatch, useSelector } from "react-redux"
 import { axiosInstance } from "./api/index"
 import { login } from "./redux/features/authSlice"
 
-import Dashboard from "./components/Tenant/Dashboard"
-import About from "./components/Tenant/About"
-import Comment from "./components/Tenant/Comment"
-import Analytics from "./components/Tenant/Analytics"
-import OrderList from "./components/Tenant/OrderList"
+import OrderList from "./components/order/OrderList"
 import Listing from "./pages/listing/Listing"
 import ListingDetails from "./pages/listing/ListingDetails"
 import AddRoom from "./components/room/AddRoom"
 
-import Property from "./components/Tenant/Property"
-import Loader from "./components/loader/Loader"
+import UserPage from "./components/user/User"
 
 function App() {
   const authSelector = useSelector((state) => state.auth)
   console.log(authSelector, "test")
   const [message, setMessage] = useState("")
   const location = useLocation()
-
-  console.log(location, "test2")
-
-  const renderTenaantRoutes = () => {
-    if (authSelector.role === "tenant") {
-      return (
-        <>
-          <Route path="/tenant" element={<Tenant />} />
-        </>
-      )
-    }
-    return null
-  }
 
   const [authCheck, setAuthCheck] = useState(false)
   const dispatch = useDispatch()
@@ -107,21 +89,29 @@ function App() {
         <Route path="/inputroom" element={<AddRoom />} />
 
         {/* ========== Tenant Area =========== */}
-        <Route
+        {/* <Route
           path="/tenant/:id"
           element={
             authSelector.role === "tenant" ? <Tenant /> : <NotFoundPage />
           }
-        />
+        /> */}
 
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/comment" element={<Comment />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/property" element={<Property />} />
+        {/* <Route path="/property" element={<Property />} /> */}
         <Route path="/orderlist" element={<OrderList />} />
 
-        <Route path="/listing" element={<Listing />} />
+        {/* <Route path="/listing" element={<Listing />} /> */}
+        <Route
+          path="/tenant/:id"
+          element={
+            authSelector.role === "tenant" ? <Listing /> : <NotFoundPage />
+          }
+        />
+        <Route
+          path="/user/:id"
+          element={
+            authSelector.role === "user" ? <UserPage /> : <NotFoundPage />
+          }
+        />
 
         <Route path="/listing/details/:id" element={<ListingDetails />} />
       </Routes>

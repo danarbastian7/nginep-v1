@@ -42,10 +42,6 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
           position="static"
         >
           <Flex flex={0.5} ml="-10px">
-            {/* {properties.map((val) => (
-              <Image src={val.image_url} h="100%" layout={"fill"} />
-            ))} */}
-
             <Image
               src={getImages[0]}
               borderRadius="2xl"
@@ -68,12 +64,6 @@ const ListingRow = ({ name, image_url, id, properties, address, city }) => {
             >
               {name || "name"}
               <br />
-              {/* {images.map((val) => (
-                <Image src={val.picture_url} h="100%" layout={"fill"} />
-              ))} */}
-              {/* {city.map((val) => (
-                <Text>{val?.cities_name}</Text>
-              ))} */}
               <Text fontSize={"small"} fontFamily={"mono"} fontWeight="light">
                 {city?.cities_name || "cities"}
               </Text>

@@ -54,9 +54,15 @@ const Navbar = () => {
               </a>
             </li>
             <li className="navItem">
-              <a href={`/tenant/${authSelector.id}`} className="navLink">
-                Tenant Page
-              </a>
+              {authSelector.role === "tenant" ? (
+                <a href={`/tenant/${authSelector.id}`} className="navLink">
+                  Tenant Page
+                </a>
+              ) : (
+                <a href={`/user/${authSelector.id}`} className="navLink">
+                  User Page
+                </a>
+              )}
             </li>
             <li className="navItem">
               <a href="/myprofile" className="navLink">
