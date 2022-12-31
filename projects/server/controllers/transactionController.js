@@ -30,8 +30,43 @@ const transactionController = {
       })
 
       return res.status(200).json({
-        message: "find full booked room",
+        message: "find transaction ",
         data: transaction,
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(500).json({
+        message: err.message,
+      })
+    }
+  },
+  getUserTransaction: async (req, res) => {
+    try {
+      const user = await User.findByPk(req.params.id, {
+        include: {
+          model: Transaction,
+        },
+      })
+      if (user.Transactions.length === 0) {
+        throw new error()
+      }
+      const arrTransaction = user.Transactions.map((val) => val.id)
+      const userTransaction = await Transaction.findAll({
+        where: {
+          id: arrTransaction,
+        },
+        include: [
+          {
+            model: db.Property,
+            include: [{ model: db.PropertyImage }, { model: db.Cities }],
+          },
+          { model: db.PropertyItem, include: [{ model: db.Images }] },
+        ],
+      })
+
+      return res.status(200).json({
+        message: "find user transaction",
+        data: userTransaction,
       })
     } catch (err) {
       console.log(err)

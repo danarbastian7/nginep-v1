@@ -1,9 +1,14 @@
 import {
   Badge,
   Box,
+  Button,
   Center,
+  color,
   Divider,
+  Grid,
+  GridItem,
   HStack,
+  Stack,
   StackDivider,
   Table,
   TableContainer,
@@ -20,6 +25,9 @@ import { Link, useLocation } from "react-router-dom"
 import { GrLinkPrevious, GrAdd } from "react-icons/gr"
 import { axiosInstance } from "../../api"
 import moment from "moment"
+import { HiBadgeCheck } from "react-icons/hi"
+import { IoIosOptions } from "react-icons/io"
+import { Card } from "antd"
 
 const OrderList = () => {
   const search = useLocation().search
@@ -35,17 +43,19 @@ const OrderList = () => {
     }
   }
 
-  const status = ["waiting for payment", "need accept", "accepted", "cancelled"]
   console.log(orderList, "response")
 
   useEffect(() => {
     fetchOrderList()
+    // getStatus()
   }, [])
+
   return (
     <Box
       width="400px"
       position={"static"}
-      mb="16rem"
+      // mb="12rem"
+      mt="4.5rem"
       border={"2px solid red"}
       height="auto"
     >
@@ -55,71 +65,88 @@ const OrderList = () => {
 
       <Center>
         <VStack>
-          <Text>This is your order recap</Text>
+          <Text>This is your order list history</Text>
           <Text fontSize={"10px"} fontStyle="italic" color={"blue"}>
             *swipe right on table for other information
           </Text>
         </VStack>
       </Center>
       <Center>
-        <Box
-          //   border={"2px solid blue"}
-          width="350px"
-          backgroundColor={"whiteAlpha.700"}
-          boxShadow="xl"
-        >
-          <TableContainer
-            width={"400px"}
-            fontSize="10px"
-            border={"2px solid white"}
-          >
-            <Table variant={"striped"} colorScheme="facebook" size={"sm"}>
-              <Thead>
-                <Tr backgroundColor={"linkedin.400"} textColor="white">
-                  <Th maxW={"45%"}>Property Name</Th>
-                  <Th maxW={"45%"}>Room Name</Th>
-                  <Th maxW={"45%"}>Cust. Name</Th>
-                  <Th maxW={"20%"}>Start Date</Th>
-                  <Th maxW={"20%"}>End Date</Th>
-                  <Th maxW="15%">Status</Th>
-                  <Th>Total Price</Th>
-                </Tr>
-              </Thead>
-              {orderList.map((val) => (
-                <Tbody>
-                  <Td>{val.Property?.name}</Td>
-                  <Td>{val.PropertyItem?.item_name}</Td>
-                  <Td>{val.User?.username}</Td>
-                  <Td>{moment(val.start_date).utc().format("YYYY-MM-DD")}</Td>
-                  <Td>{moment(val.end_date).utc().format("YYYY-MM-DD")}</Td>
-                  <Td>
-                    {val.status === "waiting for payment" && (
-                      <Badge colorScheme={"green"}>Waiting for payment</Badge>
-                    )}
-                    {val.status === "need accepted" && (
-                      <Badge colorScheme={"orange"}>Need accepted</Badge>
-                    )}
-                    {val.status === "accepted" && (
-                      <Badge colorScheme={"linkedin"}> Accepted</Badge>
-                    )}
-                    {val.status === "cancelled" && (
-                      <Badge colorScheme={"red"}> Cancelled</Badge>
-                    )}
-                  </Td>
-                  <Td>
-                    {new Intl.NumberFormat("ja-JP", {
-                      style: "currency",
-                      currency: "JPY",
-                    }).format(
-                      (moment(val.end_date).utc().format("DD") -
-                        moment(val.start_date).utc().format("DD")) *
-                        val.PropertyItem?.price
-                    )}
-                  </Td>
-                </Tbody>
-              ))}
-            </Table>
-          </TableContainer>
+        <Box maxW={"400px"}>
+          {orderList.map((val) => (
+            <Stack
+              borderRadius="2xl"
+              w="340px"
+              height="150px"
+              direction="row"
+              padding={5}
+              position="static"
+              align={"stretch"}
+              mb="4rem"
+            >
+              <Card
+                title={val.Property?.name}
+                extra={
+                  val.status === "accepted" || val.status === "cancelled" ? (
+                    <HStack>
+                      <HiBadgeCheck color="green" />
+                      <Text fontSize={"12px"}>Done</Text>
+                    </HStack>
+                  ) : (
+                    <Link to={"/"}>
+                      <HStack>
+                        <IoIosOptions color="black" />
+                        <Text color={"black"} fontSize={"12px"}>
+                          Action
+                        </Text>
+                      </HStack>
+                    </Link>
+                  )
+                }
+                type="inner"
+                bordered={true}
+                style={{
+                  width: 300,
+                  height: "200px",
+                  boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)",
+                }}
+                headStyle={{
+                  backgroundColor: "powderblue",
+                }}
+              >
+                <p>
+                  {" "}
+                  {val.status === "waiting for payment" && (
+                    <Badge colorScheme={"green"}>Waiting for payment</Badge>
+                  )}
+                  {val.status === "need accepted" && (
+                    <Badge colorScheme={"orange"}>Need accepted</Badge>
+                  )}
+                  {val.status === "accepted" && (
+                    <Badge colorScheme={"linkedin"}> Accepted</Badge>
+                  )}
+                  {val.status === "cancelled" && (
+                    <Badge colorScheme={"red"}> Cancelled</Badge>
+                  )}
+                </p>
+                <Text>Room: {val.PropertyItem?.item_name}</Text>
+                <Text>
+                  Total:
+                  {new Intl.NumberFormat("ja-JP", {
+                    style: "currency",
+                    currency: "JPY",
+                  }).format(val.price)}
+                </Text>
+                <Text>
+                  Start Date:{" "}
+                  {moment(val.start_date).utc().format("YYYY-MM-DD")}
+                </Text>
+                <Text>
+                  End Date: {moment(val.end_date).utc().format("YYYY-MM-DD")}
+                </Text>
+              </Card>
+            </Stack>
+          ))}
         </Box>
       </Center>
     </Box>

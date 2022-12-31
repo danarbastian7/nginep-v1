@@ -86,7 +86,11 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div onClick={showNav} className="toggleNavbar">
+        <div
+          onClick={showNav}
+          className="toggleNavbar"
+          style={{ paddingRight: "1rem" }}
+        >
           <HiMenu
             className="icon"
             onClick={() => {

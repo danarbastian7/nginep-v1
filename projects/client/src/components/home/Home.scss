@@ -21,6 +21,8 @@
   align-items: center;
   justify-content: center;
   margin: auto;
+  // border: 2px solid red;
+  height: 750px;
 
   .secContainer {
     margin-top: 100px;
@@ -30,6 +32,8 @@
         font-size: 1.5rem;
         font-weight: 700;
         line-height: 2.5rem;
+        margin-left: 1rem;
+        // border: 2px solid red;
       }
       .subTitle {
         color: var(--WhiteColor);
@@ -39,6 +43,7 @@
         padding: 1rem 0;
         max-width: 100%;
         margin: auto;
+        margin-left: 1rem;
       }
       .btn {
         padding: 0.6rem 1.5rem;
@@ -54,6 +59,7 @@
       left: 50%;
       box-shadow: 0 2px 8px 4px rgba(178, 178, 178, 0.45);
       margin-bottom: -50vh;
+
       // margin-top: -10vh;
 
       // margin: auto;

@@ -19,7 +19,6 @@ import { useNavigate, Link, useLocation } from "react-router-dom"
 import { login } from "../redux/features/authSlice"
 
 import { logout } from "../redux/features/authSlice"
-import useAuth from "../components/hooks/useAuth"
 
 //===================firebase=====================
 import {
@@ -34,7 +33,7 @@ import { useContext } from "react"
 //===================firebase=====================
 
 const Login = () => {
-  const { setAuth } = useAuth()
+  // const { setAuth } = useAuth()
 
   const navigate = useNavigate()
   const location = useLocation()

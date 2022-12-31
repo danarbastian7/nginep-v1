@@ -2,30 +2,12 @@ import React from "react"
 import styled from "styled-components"
 import "./EditProfile.scss"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  Button,
-  Center,
-  Flex,
-  Input,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuGroup,
-  MenuItem,
-  MenuItemOption,
-  MenuList,
-  MenuOptionGroup,
-  Select,
-  useToast,
-} from "@chakra-ui/react"
+import { Button, Input, Select, useToast } from "@chakra-ui/react"
 import { useFormik } from "formik"
-import { useParams, Link, Navigate, useNavigate } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { axiosInstance } from "../../api/index"
 import { login } from "../../redux/features/authSlice"
-import { useEffect, useState } from "react"
-import { DatePicker } from "antd"
-import Dropdown from "react-bootstrap/Dropdown"
-import DropdownButton from "react-bootstrap/DropdownButton"
+import { useState } from "react"
 
 const EditProfile = () => {
   const authSelector = useSelector((state) => state.auth)

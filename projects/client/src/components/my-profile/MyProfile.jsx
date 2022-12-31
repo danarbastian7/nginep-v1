@@ -1,17 +1,10 @@
 import React from "react"
 import "./MyProfile.scss"
 import { useState } from "react"
-import image from "../../assets/Foto_Danar_Sadan_Bastian_4x6-removebg-preview.jpg"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { Avatar, Button, useToast } from "@chakra-ui/react"
-import { axiosInstance } from "../../api/index"
-import { useEffect } from "react"
-import { useFormik } from "formik"
-import { auth } from "../../config/firebase"
-import Navbar from "../navbar/Navbar"
-// import { Avatar } from "@chakra-ui/react"
+import { Button, useToast } from "@chakra-ui/react"
 
 const MyProfile = () => {
   const authSelector = useSelector((state) => state.auth)
@@ -20,15 +13,12 @@ const MyProfile = () => {
   const params = useParams()
   const toast = useToast()
 
-  console.log(authSelector)
-
   return (
     <>
       <div className="box-container">
         <div className="card-container">
           <div className="upper-container">
             <div className="image-container">
-              {/* <img src={image} class="card-image" /> */}
               <img
                 alt=""
                 height="100px"

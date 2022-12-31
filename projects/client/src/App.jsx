@@ -1,9 +1,9 @@
 import axios from "axios"
-import logo from "./logo.svg"
+
 import { useEffect, useState } from "react"
 import Home from "./components/home/Home"
 
-import { Route, Router, Routes, useLocation } from "react-router-dom"
+import { Route, Routes, useLocation } from "react-router-dom"
 import Login from "./pages/Login"
 import { Link } from "react-router-dom"
 import Navbar from "./components/navbar/Navbar"
@@ -23,13 +23,12 @@ import ListingDetails from "./pages/listing/ListingDetails"
 import AddRoom from "./components/room/AddRoom"
 
 import UserPage from "./components/user/User"
+import DetailProperty from "./components/user/DetailProperty"
 
 function App() {
   const authSelector = useSelector((state) => state.auth)
-  console.log(authSelector, "test")
   const [message, setMessage] = useState("")
   const location = useLocation()
-
   const [authCheck, setAuthCheck] = useState(false)
   const dispatch = useDispatch()
   const keepUserLoggedIn = async () => {
@@ -46,7 +45,6 @@ function App() {
           authorization: `Bearer ${auth_token}`,
         },
       })
-      console.log(response)
 
       dispatch(login(response.data.data))
       localStorage.setItem("auth_token", response.data.token)
@@ -70,11 +68,8 @@ function App() {
 
   return (
     <main>
-      {/* {
-        location.pathname.match("tenant") ? : 
-        <Navbar />} */}
       <Navbar />
-      {/* {!loaded ? <Loader /> : <ListingDetails />} */}
+
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -89,33 +84,25 @@ function App() {
         <Route path="/inputroom" element={<AddRoom />} />
 
         {/* ========== Tenant Area =========== */}
-        {/* <Route
-          path="/tenant/:id"
-          element={
-            authSelector.role === "tenant" ? <Tenant /> : <NotFoundPage />
-          }
-        /> */}
 
-        {/* <Route path="/property" element={<Property />} /> */}
         <Route path="/orderlist" element={<OrderList />} />
-
-        {/* <Route path="/listing" element={<Listing />} /> */}
         <Route
           path="/tenant/:id"
           element={
             authSelector.role === "tenant" ? <Listing /> : <NotFoundPage />
           }
         />
+        <Route path="/listing/details/:id" element={<ListingDetails />} />
+
+        {/* /* ============= User Area =============*/}
         <Route
           path="/user/:id"
           element={
             authSelector.role === "user" ? <UserPage /> : <NotFoundPage />
           }
         />
-
-        <Route path="/listing/details/:id" element={<ListingDetails />} />
+        <Route path="/roomdetail/:id" element={<DetailProperty />} />
       </Routes>
-      {/* <Footer /> */}
     </main>
   )
 }

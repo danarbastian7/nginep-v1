@@ -35,6 +35,7 @@ import {
   useToast,
   Flex,
   CloseButton,
+  AlertDialogContent,
 } from "@chakra-ui/react"
 import { BsThreeDotsVertical, BsUpload } from "react-icons/bs"
 import { axiosInstance } from "../../api"
@@ -142,16 +143,13 @@ const RoomCard = ({
       await axiosInstance.delete(`/room/deleteimage/${openImageId.id}`)
       getImages()
       setOpenImageId(null)
-      // fetchRoom()
 
       toast({
         title: "Image deleted",
         status: "info",
       })
-      // fetchRoom()
+
       modalImageAsk.onClose()
-      // getImg()
-      // window.location.reload(false)
     } catch (err) {
       console.log(err)
     }
@@ -179,18 +177,10 @@ const RoomCard = ({
         title: "Image has been added",
         status: "success",
       })
-
-      // window.location.reload(false)
-      // event.preventDefault()
     } catch (err) {
       console.log(err)
     }
   }
-
-  //================================SHOW DATA IN CALENDAR
-
-  const getDate = calendars.map((val) => val.startDate)
-  console.log(getDate)
 
   useEffect(
     () => {
@@ -460,22 +450,14 @@ const RoomCard = ({
                                     modalImageAsk.onOpen()
                                   }}
                                 />
-                                {/* </div> */}
 
                                 <AlertDialog
                                   isCentered
                                   isOpen={modalImageAsk.isOpen}
-                                  // leastDestructiveRef={cancelRef}
                                   onClose={modalImageAsk.onClose}
                                 >
-                                  <AlertDialogOverlay
-                                    backgroundColor={"white"}
-                                    boxSize="-webkit-max-content"
-                                    justifyItems={"center"}
-                                    alignSelf="center"
-                                    borderRadius={"10px"}
-                                    isCentered
-                                  >
+                                  <AlertDialogOverlay />
+                                  <AlertDialogContent maxWidth="-webkit-max-content">
                                     <AlertDialogHeader
                                       fontSize={"md"}
                                       fontWeight="bold"
@@ -509,7 +491,8 @@ const RoomCard = ({
                                         Delete
                                       </Button>
                                     </AlertDialogFooter>
-                                  </AlertDialogOverlay>
+                                  </AlertDialogContent>
+                                  {/* </AlertDialogOverlay> */}
                                 </AlertDialog>
                               </Box>
                             ))}
@@ -546,20 +529,13 @@ const RoomCard = ({
 
                       <AlertDialog
                         isCentered
-                        // isOpen={isOpen}
                         isOpen={modalDelete.isOpen}
                         leastDestructiveRef={cancelRef}
-                        // onClose={onClose}
                         onClose={modalDelete.onClose}
+                        motionPreset="slideInBottom"
                       >
-                        <AlertDialogOverlay
-                          backgroundColor={"white"}
-                          boxSize="-webkit-max-content"
-                          justifyItems={"center"}
-                          alignSelf="center"
-                          borderRadius={"10px"}
-                          isCentered
-                        >
+                        <AlertDialogOverlay />
+                        <AlertDialogContent maxWidth="-webkit-max-content">
                           <AlertDialogHeader fontSize={"md"} fontWeight="bold">
                             Delete Room
                           </AlertDialogHeader>
@@ -583,14 +559,14 @@ const RoomCard = ({
                               Delete
                             </Button>
                           </AlertDialogFooter>
-                        </AlertDialogOverlay>
+                        </AlertDialogContent>
+                        {/* </AlertDialogOverlay> */}
                       </AlertDialog>
                     </VStack>
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
               <Carousel autoplay nextArrow={BiEditAlt}>
-                {/* <Slider {...settings}> */}
                 {images.map((val) => (
                   <Image
                     border={"5px solid white"}
@@ -600,7 +576,6 @@ const RoomCard = ({
                     borderRadius={"15px"}
                   />
                 ))}
-                {/* </Slider> */}
               </Carousel>
             </Box>
 

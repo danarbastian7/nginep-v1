@@ -29,34 +29,34 @@ const Popular = ({ id, name, city, properties_image }) => {
     <div className="popularMain">
       <section className="popular section container" id="popular">
         <div className="secContainer">
-          <div
-            style={{
-              marginTop: "5rem",
-            }}
-          >
-            <div className="mainContent">
-              <div className="singleDestination">
-                <div className="destImage">
-                  {properties_image.map((val) => (
-                    <img src={val.image_url} />
-                  ))}
+          <Link to={`/roomdetail/${id}`}>
+            <div
+              style={{
+                marginTop: "5rem",
+              }}
+            >
+              <div className="mainContent">
+                <div className="singleDestination">
+                  <div className="destImage">
+                    {properties_image.map((val) => (
+                      <img src={val.image_url} />
+                    ))}
 
-                  {/* </Slider> */}
-                  <div className="overlayInfo">
-                    <h3>{name}</h3>
+                    <div className="overlayInfo">
+                      <h3>{name}</h3>
 
-                    <BsArrowRightShort className="icon" />
+                      <BsArrowRightShort className="icon" />
+                    </div>
                   </div>
-                </div>
-                <div className="destFooter">
-                  <div className="destText flex">
-                    <h6>{city?.cities_name}</h6>
+                  <div className="destFooter">
+                    <div className="destText flex">
+                      <h6>{city?.cities_name}</h6>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* </Link> */}
+          </Link>
         </div>
       </section>
     </div>

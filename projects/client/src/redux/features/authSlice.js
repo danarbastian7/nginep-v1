@@ -29,7 +29,6 @@ const authSlice = createSlice({
       state.ktp = action.payload.ktp
       // state.first_name = action.payload.first_name
       // state.last_name = action.payload.last_name
-      console.log(action.payload)
     },
     logout: (state) => {
       state.id = 0

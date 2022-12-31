@@ -111,6 +111,7 @@ const ListingDetails = () => {
 
     return dateRoom
   })
+  console.log(newFormatted, "try")
 
   //=============FIND DATE IN CALENDAR
 
@@ -156,8 +157,6 @@ const ListingDetails = () => {
       )
     })
   }
-
-  console.log(room)
 
   const [index, setIndex] = useState(0)
 

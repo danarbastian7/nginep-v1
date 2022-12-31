@@ -48,7 +48,7 @@ const Home = () => {
       })
       setProperty(response.data.data)
       setTotalCount(response.data.dataCount)
-      console.log("result", totalCount)
+
       setMaxPage(Math.ceil(response.data.dataCount / maxProperties))
       console.log(response)
 
@@ -64,6 +64,7 @@ const Home = () => {
     }
   }
 
+  console.log("result", property)
   const renderProperty = () => {
     return property.map((val) => {
       return (
